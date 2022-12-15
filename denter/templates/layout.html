@@ -5,56 +5,23 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-        <!--jQuery-->
-        <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
-        </script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        
-        <!--flatpickr (kalendar)-->
-        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
-
-        <!--pusher-->
-        <script src="https://js.pusher.com/5.0/pusher.min.js"></script>
-
-
-        <!--skočni prozor-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-      
         <!-- stil i font-->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,800&display=swap" rel="stylesheet">
         <link href="/static/styles.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 
-        <!-- popis naselja i sportova-->
-        <script src="/static/naselja.json"></script>
-        <script src="/static/sportovi.json"></script>
-
         <!--ikona (favicon)-->
         <link rel="icon" type="image/png" sizes="32x32" href="/static/slike/favicon.ico">
 
-        <title>Đir {% block title %}{% endblock %}</title>
+        <title>Denter {% block title %}{% endblock %}</title>
     </head>
 
     <body>
         <nav>
             {% block link %}{% endblock %}
-            <a id="naslov" href="/">đir</a>
+            <a id="naslov" href="/">Denter</a>
             {% block botun %}{% endblock %}
         </nav>
-
-        {% with poruke = get_flashed_messages(with_categories=true) %}
-            {% if poruke %}
-                {% for category, poruka in poruke %}
-                    <div class="poruka {{ category }}">
-                        {{ poruka }}
-                        <span style="cursor: pointer;" onclick="this.parentElement.style.display='none';">&times;</span>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
 
         {% block header %}{% endblock %}
 
@@ -63,66 +30,6 @@
     </main>
     </body>
 
-    <script>
-        $(".birac_datuma").flatpickr({
-            enableTime: true,
-            minDate: "today",
-            defaultDate: "today",
-            dateFormat: "Y/m/d H:i",
-            time_24hr: true,
-              locale: {
-                weekdays: {
-                  shorthand: ['Ned', 'Pon', 'Uto', 'Sri', 'Čet', 'Pet', 'Sub'],
-                  longhand: ["Nedjelja","Ponedjeljak","Utorak","Srijeda","Četvrtak","Petak","Subota"],
-                },
-                months: {
-                  shorthand: ["Sij","Velj","Ožu","Tra","Svi","Lip",
-	"Srp","Kol","Ruj","Lis","Stu","Pro" ],
-                  longhand: ["Siječanj","Veljača","Ožujak","Travanj","Svibanj","Lipanj",
-	"Srpanj","Kolovoz","Rujan","Listopad","Studeni","Prosinac"],
-                },
-              },
-        });
-
-
-
-        $( function() {
-            $( ".mjesto_input" ).autocomplete({
-              source: naselja,
-              minLength: 2,
-              change: function() {
-                naselje = $(this).val().toLowerCase();
-                tocno = $.inArray(naselje, naselja);
-                if (tocno < 0) {
-                    $(this).val("");
-                    return false;
-                }
-             }
-            });
-
-            $( ".sport_input" ).autocomplete({
-              source: sportovi,
-              minLength: 2,
-              change: function() {
-                sport = $(this).val().toLowerCase();
-                tocno = $.inArray(sport, sportovi);
-                if (tocno < 0) {
-                    $(this).val("");
-                    return false;
-                }
-             }
-            });
-
-        });
-    
-        $(document).ready(function(){
-        var pozadine = ["poz1", "poz2", "poz3", "poz4", "poz5", "poz6", "poz7", "poz8"];
-
-        $(".kartica").each(function(){
-            $(this).addClass(pozadine[~~(Math.random()*8)]);
-        });
-    });
-    </script>
 
    
 </html>
