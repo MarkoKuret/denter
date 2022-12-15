@@ -4,7 +4,7 @@ from flask import Flask
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 from tempfile import mkdtemp
-import locale
+#import locale
 #from flask_mail import Mail
 
 # konfiguracije aplikacije
@@ -23,7 +23,7 @@ app.config["SESSION_FILE_DIR"] = mkdtemp()
 Session(app)
 
 #lokalizacija (za datume na hr)
-locale.setlocale(locale.LC_ALL, "hr_HR.UTF-8")
+#locale.setlocale(locale.LC_ALL, "hr_HR.UTF-8")
 
 
 #konfiguracija email servera
