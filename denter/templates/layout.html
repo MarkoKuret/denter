@@ -6,20 +6,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
         <!-- stil i font-->
+        <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,800&display=swap" rel="stylesheet">
         <link href="/static/styles.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
         <!--ikona (favicon)-->
         <link rel="icon" type="image/png" sizes="32x32" href="/static/slike/favicon.ico">
 
-        <title>Denter {% block title %}{% endblock %}</title>
+        <title>Denter{% block title %}{% endblock %}</title>
     </head>
 
     <body>
         <nav>
             {% block link %}{% endblock %}
-            <a id="naslov" href="/">Denter</a>
+
             {% block botun %}{% endblock %}
         </nav>
 
@@ -28,6 +31,7 @@
     <main>
     {% block main %}{% endblock %}
     </main>
+    
     </body>
 
 

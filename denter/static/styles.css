@@ -1,13 +1,5 @@
 
 /*-----općenito-------*/
  body {
-     padding-left: 5px;
-     padding-right: 5px;
      height: 100%;
-     font-size: 5vmin;
-     font-family: 'Montserrat', sans-serif;
-     color: #434343;
-     background-repeat: no-repeat;
-     background-size: contain;
-     background-position: bottom right;
 }
