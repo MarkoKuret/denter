@@ -1,15 +1,8 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>readme.me</title>
-  <link rel="stylesheet" href="https://stackedit.io/style.css" />
-</head>
-
 <body class="stackedit">
-  <div class="stackedit__html"><h1 id="denter-set-up-and-run">DENTER SET-UP AND RUN</h1>
+<h1 id="denter-set-up-and-run">DENTER SET-UP AND RUN</h1>
 <h2 id="upute-za-pocetak-rada">Upute za pocetak rada</h2>
 <blockquote>
 <p>upute su pisane s UNIX naredbama, dakle rade na Linuxu, MacOS i Windowsu s intaliranim dodatkon WSL (winows sub-system for linux). Moze se koristiti i “cisiti” Windows vecina naredba je slicna, vjerovatno je efikasnije koristiti WSL.</p>
@@ -72,7 +65,7 @@ folderima</p>
 <li><strong>pokretanje</strong><br>
 <code>python3 pokreni.py</code></li>
 </ul>
-</div>
+
 </body>
 
 </html>
