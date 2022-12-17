@@ -9,12 +9,14 @@ from tempfile import mkdtemp
 
 # konfiguracije aplikacije
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "EsV5ClS1GHistLq6"
+app.config["SECRET_KEY"] = "EsX5Cls1GiistLq6"
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
-#app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-#app.config["SQLALCHEMY_DATABASE_URI"] =  'sqlite:///denter.db'
-#db = SQLAlchemy(app)
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["SQLALCHEMY_DATABASE_URI"] =  'sqlite:///denter.db'
+db = SQLAlchemy(app)
+
+app.app_context().push()
 
 # konfiguracija sessiona
 app.config["SESSION_PERMANENT"] = False
