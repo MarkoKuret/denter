@@ -50,11 +50,6 @@ class Usluga (db.Model):
     cijena = db.Column(db.Integer,nullable=False)
     opis = db.Column(db.Text)
 
-class Poruka (db.Model):
-    pacijent = db.Column(db.Integer, db.ForeignKey('Pacijent.OIB'), nullable=False)
-    osoblje = db.Column(db.Integer, db.ForeignKey('Osoblje.OIB'), nullable=False)
-    tekst = db.Column(db.Text)
-
 
 
 
