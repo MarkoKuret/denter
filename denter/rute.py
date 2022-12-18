@@ -1,7 +1,8 @@
 from denter import app, db
-from flask import render_template, redirect, url_for, flash, session #request, flash, jsonify
+from flask import render_template, redirect, url_for, flash, session, request # flash, jsonify
 from denter.obrasci import RegistracijaObrazacOsoblje, PrijavaObrazac, RegistracijaObrazacKlijenti
 from denter.modeli import Korisnik
+#from denter.add_event import events
 from functools import wraps
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -94,3 +95,8 @@ def odabir():
 def pocetna():
     #otvaranje pocetne stranice
     return render_template('pocetna.html')
+
+@app.route("/calendar")
+def calendar():
+    return render_template('calendar.html') 
+
