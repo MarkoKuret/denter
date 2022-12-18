@@ -16,12 +16,12 @@ def potrebna_prijava(f):
 
 @app.route("/", methods=["GET"])
 def index():
-    return redirect(url_for("prijava"))
+    return redirect(url_for("pocetna"))
 
 @app.route("/home", methods=["GET"])
 @potrebna_prijava
 def home():
-    return render_template("home.html")
+    return render_template("pocetna.html")
 
 @app.route("/prijava", methods=["GET", "POST"])
 def prijava():
@@ -88,5 +88,9 @@ def odjava():
 @app.route("/odabir")
 def odabir():
     #odabir vrste korisnika
-
     return render_template('odabir.html')
+
+@app.route("/pocetna")
+def pocetna():
+    #otvaranje pocetne stranice
+    return render_template('pocetna.html')
