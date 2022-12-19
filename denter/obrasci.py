@@ -3,7 +3,7 @@ from wtforms import StringField, EmailField, PasswordField, SubmitField, Boolean
 #from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from denter.modeli import Korisnik
-#from flask import session
+from flask import session
 
 #obrazac za prijavu
 class PrijavaObrazac(FlaskForm):
@@ -31,6 +31,15 @@ class RegistracijaObrazacOsoblje(FlaskForm):
     potvrda = PasswordField('Potvrda lozinke', validators=[DataRequired(), EqualTo('lozinka')])
     submit = SubmitField('Registriraj se')
     oib = StringField('OIB', validators=[DataRequired(), Length(min =11, max=11)])
+
+#obrazac sa dodavanje termina
+class TerminObrazac(FlaskForm):
+    ime = StringField('Naziv termina', )
+    datum = StringField('Datum termina', validators=[DataRequired()])
+    pocetak = StringField('vrijeme termina', validators=[DataRequired()])
+    kraj = StringField('Kraj termina') #trenutno se ne koristi
+    submit = SubmitField('Dodaj')
+
 
     #provjera jedinstvenosti korisnickog imena
     def validate_ime(self, ime):

@@ -1,10 +1,12 @@
 from denter import app, db
-from flask import render_template, redirect, url_for, flash, session, request # flash, jsonify
-from denter.obrasci import RegistracijaObrazacOsoblje, PrijavaObrazac, RegistracijaObrazacKlijenti
+from flask import render_template, redirect, url_for, flash, session #request, flash, jsonify
+from denter.obrasci import RegistracijaObrazacOsoblje, PrijavaObrazac, RegistracijaObrazacKlijenti, TerminObrazac
 from denter.modeli import Korisnik
-#from denter.add_event import events
+#from denter.calendar_events import events
+from denter.calendar_events import events
 from functools import wraps
 from werkzeug.security import check_password_hash, generate_password_hash
+
 
 #dekorator za prijavu
 def potrebna_prijava(f):
@@ -98,5 +100,27 @@ def pocetna():
 
 @app.route("/calendar")
 def calendar():
-    return render_template('calendar.html') 
+    return render_template('calendar.html', events=events) 
+
+
+@app.route("/addevent", methods=["GET", "POST"])
+def add():
+    obrazac = TerminObrazac()
+
+    if obrazac.validate_on_submit():
+        title = obrazac.ime
+        date = obrazac.datum
+        time = obrazac.pocetak
+        end = obrazac.kraj
+        events.append({
+            'title': title.data,
+            'start': date.data + " " + time.data,
+            'end': end.data
+        })
+        print(events)
+        return redirect(url_for('calendar'))
+
+
+    return render_template("addevent.html", naslov='dodavnaje termina', obrazac=obrazac)
+
 
