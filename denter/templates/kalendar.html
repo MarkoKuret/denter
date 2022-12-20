@@ -1,13 +1,65 @@
 {% extends "layout.html" %}
 {% block main %}
-    <div>
-        <a href="/addevent"
-           class="inline-block mt-10 ml-20 px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-           id="Add"
-           name="Add"
-           type="button"
-           value="Dodaj termin"> Dodaj termin</a>
+    <!-- Main modal -->
+    <div id="authentication-modal"
+         tabindex="-1"
+         aria-hidden="true"
+         class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+        <div class="relative w-full h-full max-w-md md:h-auto">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <button type="button"
+                        id="modal_zatvori"
+                        class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                        data-modal-toggle="authentication-modal">
+                    <svg aria-hidden="true"
+                         class="w-5 h-5"
+                         fill="currentColor"
+                         viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd">
+                        </path>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+                <div class="px-6 py-6 lg:px-8">
+                    <form action="" method="POST">
+                        {{ obrazac.hidden_tag() }}
+                        <div class="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
+                            <p class="text-center dark:text-white font-semibold mx-4 mb-0">Dodajte termin</p>
+                        </div>
+                        <!-- Input Naziva termina -->
+                        <div class="mb-6">
+                            {{ obrazac.ime(type="text", class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", placeholder="Kratak opis usluge") }}
+                        </div>
+                        <!-- Input pocetka-->
+                        <div class="mb-6">
+                            {{ obrazac.datum(type="text", class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", placeholder="pr. 2022-12-25") }}
+                        </div>
+                        <div class="mb-6">
+                            {{ obrazac.pocetak(type="text", class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", placeholder="pr. 15:00") }}
+                        </div>
+                        <!-- Input kraja-->
+                        <!-- <div class="mb-6">
+      #{{ obrazac.kraj(type="text", class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none", placeholder="kraj") }}
+</div> -->
+                        <div class="flex justify-between items-center mb-6 text-sm lg:text-base">
+                            <div class="text-center lg:text-left">
+                                {{ obrazac.submit(class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800") }}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
+    <!-- Modal toggle -->
+    <button id="modal_otvori"
+            class="inline-block mt-10 ml-20 px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+            type="button"
+            data-modal-toggle="authentication-modal">
+        Dodaj termin
+    </button>
     <div class="relative z-0 flex flex-col min-w-0 p-20 break-words bg-white border-0 shadow-xl rounded-2xl bg-clip-border">
         <div data-toggle="calendar" id="calendar"></div>
     </div>
@@ -46,6 +98,20 @@
 
     calendar.render();
     });
+
+    </script>
+    <script>
+        const btn1 = document.getElementById("modal_otvori");
+        const btn2 = document.getElementById("modal_zatvori");
+        const menu = document.getElementById("authentication-modal");
+
+        btn1.addEventListener("click", () => {
+            menu.classList.toggle("hidden");
+        });
+
+        btn2.addEventListener("click", () => {
+            menu.classList.toggle("hidden");
+        });
 
     </script>
 {% endblock %}

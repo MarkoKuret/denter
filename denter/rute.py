@@ -106,13 +106,8 @@ def pocetna():
     #otvaranje pocetne stranice
     return render_template('pocetna.html')
 
-@app.route("/kalendar")
-def calendar():
-    return render_template('kalendar.html', events=events) 
-
-
-@app.route("/addevent", methods=["GET", "POST"])
-def add():
+@app.route("/kalendar", methods=["GET", "POST"])
+def kalendar():
     obrazac = TerminObrazac()
 
     if obrazac.validate_on_submit():
@@ -128,5 +123,4 @@ def add():
         print(events)
         return redirect(url_for('kalendar'))
 
-
-    return render_template("addevent.html", naslov='dodavnaje termina', obrazac=obrazac)
+    return render_template('kalendar.html', events=events, naslov='dodavnaje termina', obrazac=obrazac)
