@@ -18,12 +18,21 @@
             <p class="text-center font-semibold mx-4 mb-0">Prijava</p>
           </div>
           <!-- Input e-maila -->  
-          <div class="mb-6">        
-          {{ obrazac.email(type="text", class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none", placeholder="Email adresa") }}
+          <div class="mb-6">  
+          {% if obrazac.email.errors %}
+            {{ obrazac.email(type="text", autocomplete="off", class="form-control block w-full px-4 py-2 text-xl font-normal text-red-700 bg-white bg-clip-padding border border-solid border-red-300 rounded transition ease-in-out m-0 focus:text-red-700 focus:bg-white focus:border-red-600 focus:outline-none", placeholder="Unesite valjanu email adresu") }}
+          {% else %}
+            {{ obrazac.email(type="text", class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none", placeholder="Email adresa") }}
+          {% endif %}      
+          
           </div>
           <!-- Input lozinke  -->
           <div class="mb-6">
-          {{ obrazac.lozinka(type="password", class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none", placeholder="Lozinka") }}
+          {% if obrazac.lozinka.errors %}
+            {{ obrazac.lozinka(type="password", class="form-control block w-full px-4 py-2 text-xl font-normal text-red-700 bg-white bg-clip-padding border border-solid border-red-300 rounded transition ease-in-out m-0 focus:text-red-700 focus:bg-white focus:border-red-600 focus:outline-none", placeholder="Nevaljan format lozinke") }}
+          {% else %}
+            {{ obrazac.lozinka(type="password", class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none", placeholder="Lozinka") }}
+          {% endif %}
           </div>
           <div class="flex justify-between items-center mb-6 text-sm lg:text-base">
             <div class="form-group form-check">
