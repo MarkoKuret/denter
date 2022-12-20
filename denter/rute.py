@@ -2,10 +2,11 @@ from denter import app, db
 from flask import render_template, redirect, url_for, flash, session #request, flash, jsonify
 from flask_login import login_user, current_user, logout_user, login_required
 from denter.obrasci import OsobljeRegistracijaObrazac, PrijavaObrazac, PacijentRegistracijaObrazac, TerminObrazac
-from denter.modeli import Uloga, Pacijent, Osoblje, Korisnik
+from denter.modeli import Uloga, Pacijent, Osoblje, Korisnik, Termin
 from denter.calendar_events import events
 from werkzeug.security import check_password_hash, generate_password_hash
 from functools import wraps
+from datetime import datetime
 
 def potrebna_uloga(uloga):
     def dekorator(func):
@@ -111,7 +112,7 @@ def kalendar():
     obrazac = TerminObrazac()
 
     if obrazac.validate_on_submit():
-        title = obrazac.ime
+        title = obrazac.naziv
         date = obrazac.datum
         time = obrazac.pocetak
         end = obrazac.kraj
@@ -121,6 +122,16 @@ def kalendar():
             'end': end.data
         })
         print(events)
+
+        datumVrijeme = obrazac.datum.data + obrazac.pocetak.data
+
+        start = datetime.strptime(obrazac.datum.data, "%Y-%m-%d")
+        kraj = start
+        termin = Termin(naziv=obrazac.naziv.data, datum_start=start, datum_kraj=kraj)
+        db.session.add(termin)
+        db.session.commit()
+
+
         return redirect(url_for('kalendar'))
 
     return render_template('kalendar.html', events=events, naslov='dodavnaje termina', obrazac=obrazac)

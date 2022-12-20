@@ -43,7 +43,7 @@ class OsobljeRegistracijaObrazac(FlaskForm):
 
 #obrazac sa dodavanje termina
 class TerminObrazac(FlaskForm):
-    ime = StringField('Naziv termina', )
+    naziv = StringField('Naziv termina', )
     datum = StringField('Datum termina', validators=[DataRequired()])
     pocetak = StringField('vrijeme termina', validators=[DataRequired()])
     kraj = StringField('Kraj termina') #trenutno se ne koristi
