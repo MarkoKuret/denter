@@ -1,5 +1,5 @@
 from flask import Flask
-
+#privremena pohrana eventova u kalendaru
 events = [
     {
         'title' : 'Uklanjanje kamenca',

@@ -1,8 +1,9 @@
 from denter import app, db
 from flask import render_template, redirect, url_for, flash, session #request, flash, jsonify
 from flask_login import login_user, current_user, logout_user, login_required
-from denter.obrasci import OsobljeRegistracijaObrazac, PrijavaObrazac, PacijentRegistracijaObrazac
+from denter.obrasci import OsobljeRegistracijaObrazac, PrijavaObrazac, PacijentRegistracijaObrazac, TerminObrazac
 from denter.modeli import Uloga, Pacijent, Osoblje, Korisnik
+from denter.calendar_events import events
 from werkzeug.security import check_password_hash, generate_password_hash
 from functools import wraps
 
