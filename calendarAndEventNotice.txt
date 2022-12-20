@@ -1,0 +1,2 @@
+Zato sto baza trenutno ne radi da bi dodavanje termina (preko kalendara botun ili /addevent)
+treba zakomentirati u obrascima.py 6. i 7. liniju te sve poslije 43. linije
