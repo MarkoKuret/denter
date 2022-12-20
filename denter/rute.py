@@ -6,7 +6,7 @@ from denter.modeli import Uloga, Pacijent, Osoblje, Korisnik, Termin
 from denter.calendar_events import events
 from werkzeug.security import check_password_hash, generate_password_hash
 from functools import wraps
-from datetime import datetime
+from datetime import datetime, timedelta
 
 def potrebna_uloga(uloga):
     def dekorator(func):
@@ -112,26 +112,16 @@ def kalendar():
     obrazac = TerminObrazac()
 
     if obrazac.validate_on_submit():
-        title = obrazac.naziv
-        date = obrazac.datum
-        time = obrazac.pocetak
-        end = obrazac.kraj
-        events.append({
-            'title': title.data,
-            'start': date.data + " " + time.data,
-            'end': end.data
-        })
-        print(events)
 
-        datumVrijeme = obrazac.datum.data + obrazac.pocetak.data
+        datumVrijeme = (obrazac.datum.data + " " + obrazac.pocetak.data)
 
-        start = datetime.strptime(obrazac.datum.data, "%Y-%m-%d")
-        kraj = start
-        termin = Termin(naziv=obrazac.naziv.data, datum_start=start, datum_kraj=kraj)
+        start = datetime.strptime(datumVrijeme, "%Y-%m-%d %H:%M")
+        kraj = (start + timedelta(hours=1))
+        termin = Termin(naziv=obrazac.naziv.data, start=start, kraj=kraj)
         db.session.add(termin)
         db.session.commit()
-
-
         return redirect(url_for('kalendar'))
 
-    return render_template('kalendar.html', events=events, naslov='dodavnaje termina', obrazac=obrazac)
+    svi_termini = Termin.query.all()
+
+    return render_template('kalendar.html', termini=svi_termini, naslov='Kalendar', obrazac=obrazac)

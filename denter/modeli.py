@@ -65,6 +65,6 @@ class Usluga (db.Model):
 class Termin (db.Model):
     id = db.Column(db.Integer, primary_key=True)
     naziv = db.Column(db.Text)
-    datum_start = db.Column(db.DateTime, nullable=False)
-    datum_kraj = db.Column(db.DateTime, nullable=False)
+    start = db.Column(db.DateTime, nullable=False)
+    kraj = db.Column(db.DateTime, nullable=False)
     #usluga = db.Column(db.Integer, db.ForeignKey('usluga.id'), nullable=False)

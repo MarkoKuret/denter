@@ -63,6 +63,8 @@
     <div class="relative z-0 flex flex-col min-w-0 p-20 break-words bg-white border-0 shadow-xl rounded-2xl bg-clip-border">
         <div data-toggle="calendar" id="calendar"></div>
     </div>
+
+
     <script>
     document.addEventListener('DOMContentLoaded', function () {
         var calendarEl = document.getElementById('calendar');
@@ -81,11 +83,11 @@
                 },
 
                 events: [
-                    {% for event in events %}
+            {% for termin in termini %}
             {
-                title: '{{event.title}}',
-                start: '{{event.start}}',
-                end: '{{event.end}}',
+                title: '{{ termin.naziv }}',
+                start: '{{termin.start }}',
+                end: '{{ termin.kraj }}',
             },
             {% endfor %}
      ],
