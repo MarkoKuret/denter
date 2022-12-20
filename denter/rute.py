@@ -20,7 +20,6 @@ def potrebna_uloga(uloga):
     return dekorator
 
 @app.route("/", methods=["GET"])
-@login_required
 def index():
     return redirect(url_for("pocetna"))
 
@@ -91,12 +90,12 @@ def registracija_osoblje():
     return render_template('registracija.html', naslov='Registracija osoblja', obrazac=obrazac)
 
 @app.route("/odjava")
+@login_required
 def odjava():
     #izbrisi session
     logout_user()
     return redirect("/")
 
-@login_required
 @app.route("/odabir")
 def odabir():
     #odabir vrste Pacijenta
@@ -108,6 +107,7 @@ def pocetna():
     return render_template('pocetna.html')
 
 @app.route("/kalendar", methods=["GET", "POST"])
+@login_required
 def kalendar():
     obrazac = TerminObrazac()
 
