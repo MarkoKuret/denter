@@ -57,13 +57,11 @@ class Usluga (db.Model):
     cijena = db.Column(db.Integer, nullable=False)
     opis = db.Column(db.Text)
 
-"""
-Osoblje_Termin = db.Table("Osoblje_Termin", 
-    db.Column("korisnik_id", db.Integer(), db.ForeignKey('osoblje.id')),
-    db.Column("termin_id", db.Integer(), db.ForeignKey('termin.id')))
+#Osoblje_Termin = db.Table("Osoblje_Termin", 
+#    db.Column("osoblje_id", db.Integer(), db.ForeignKey('osoblje.id')),
+#    db.Column("termin_id", db.Integer(), db.ForeignKey('termin.id')))
+
 class Termin (db.Model):
     id = db.Column(db.Integer, primary_key=True)
     pacijent = db.Column(db.Integer, db.ForeignKey('pacijent.id'), nullable=False)
-    usluga = db.Column(db.Integer, db.ForeignKey('usluga.id'), nullable=False)
-    datum = db.Column(db.DateTime, nullable=False)
-    """
+    #usluga = db.Column(db.Integer, db.ForeignKey('usluga.id'), nullable=False)

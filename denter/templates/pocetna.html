@@ -1,146 +1,87 @@
 {% extends "layout.html" %}
-
 {% block main %}
-
-<nav class="bg-gray-800">
-    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-      <div class="relative flex h-16 items-center justify-between">
-        <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-          <!-- Mobile menu button-->
-          <button type="button" class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
-            <span class="sr-only">Open main menu</span>
-            <!--
-              Icon when menu is closed.
-  
-              Heroicon name: outline/bars-3
-  
-              Menu open: "hidden", Menu closed: "block"
-            -->
-            <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-            <!--
-              Icon when menu is open.
-  
-              Heroicon name: outline/x-mark
-  
-              Menu open: "block", Menu closed: "hidden"
-            -->
-            <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-        <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-          <div class="flex flex-shrink-0 items-center">
-            <img class="block h-8 w-auto lg:hidden" src="\static\slike\tooth.png" alt="Tooth">
-            <img class="hidden h-8 w-auto lg:block" src="\static\slike\tooth.png" alt="Tooth">
-          </div>
-          <div class="hidden sm:ml-6 sm:block">
-            <div class="flex space-x-4">
-              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a href="/pocetna" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Početna</a>
-  
-              <a href="/calendar" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Rezervacija</a>
-  
-              <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Usluge</a>
-  
-              <a href="/prijava" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Prijava</a>
-
-              <a href="/odjava" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Odjava</a>
-            </div>
-          </div>
-        </div>
-        <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <img class="block h-8 w-auto lg:hidden" src="https://cdn-icons-png.flaticon.com/512/1031/1031101.png?w=740&t=st=1671373838~exp=1671374438~hmac=3646085f425889fae1e358aa2f0a2f835cd893ba26d28c66ccac8cf32c102df9" alt="Tooth">
-            <img class="hidden h-8 w-auto lg:block" src="https://cdn-icons-png.flaticon.com/512/1031/1031101.png?w=740&t=st=1671373838~exp=1671374438~hmac=3646085f425889fae1e358aa2f0a2f835cd893ba26d28c66ccac8cf32c102df9" alt="Tooth">
-            <a href="#" class=" text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Profil</a>
-        </div>
-      </div>
+    <div class="relative">
+        <img src="\static\slike\dentists-choose-equipment-table.jpg"/>
+        <h1 class="absolute text-6xl md:text-7xl lg:text-9xl font-extrabold text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            DENTER
+        </h1>
     </div>
-  
-    <!-- Mobile menu, show/hide based on menu state. -->
-    <div class="sm:hidden" id="mobile-menu">
-      <div class="space-y-1 px-2 pt-2 pb-3">
-        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <a href="#" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Početna</a>
-  
-        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Rezervacija</a>
-  
-        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Usluge</a>
-  
-        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Prijava</a>
-      </div>
-    </div>
-</nav>
-
-
-
-    <div style=" display: flex; text-align:center;">
-        <img style="position:relative;justify-content: center;" src="\static\slike\dentists-choose-equipment-table.jpg"  width="100%" height="auto" alt="Sample image" />
-        <h1 style="left: 0;position:absolute;text-align: center;top: 200px;width: 100%;font-size:120pt;color:white; font-weight: bold;">DENTER</h1>
-      </div>
-  <div class="bg-white" style="padding-top: 1cm;">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <div class="sm:text-center">
-       
-        <p style="font-size: 36pt; font-weight: bold;">Svatko zaslužuje zdrav osmijeh</p>
-        <p style="font-size: 26pt; color: rgb(68, 68, 68); padding-top: 10pt;">Poštovani posjetitelji, dobro došli na web stranicu ordinacije dentalne medicine Vladimir Horvat.</p>
-      </div>
-  
-      <div style="padding-top: 40pt; padding-left: 25pt; padding-right: 2pt; ">
-        <div class="grid grid-cols-1 gap-y-16 md:grid-cols-2 md:gap-x-12 md:gap-y-16">
-          <div class="relative flex flex-col gap-6 sm:flex-row md:flex-col lg:flex-row">
-            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-500 text-white sm:shrink-0">
-              <!-- Heroicon name: outline/globe-alt -->
-              <img src="https://cdn-icons-png.flaticon.com/512/1244/1244691.png?w=740&t=st=1671387991~exp=1671388591~hmac=c716a7ad5888ed8c93bba83fb70ab0c0878035bb289b282549e2306490c1a375" />
-              </svg>
-            </div>
-            <div class="sm:min-w-0 sm:flex-1">
-              <p class="text-lg font-bold leading-8 text-gray-900 text-3xl">O nama</p>
-              <p class="mt-2 text-base leading-7 text-gray-600 text-2xl">Stalnom edukacijom i nadogradnjom znanja nudimo pacijentima niz dentalnih usluga stoga nam se obratite sa povjerenjem.</p>
-            </div>
-          </div>
-  
-          <div class="relative flex flex-col gap-6 sm:flex-row md:flex-col lg:flex-row">
-            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-500 text-white sm:shrink-0">
-              <!-- Heroicon name: outline/scale -->
-              <img src="https://cdn-icons-png.flaticon.com/512/234/234751.png?w=740&t=st=1671387946~exp=1671388546~hmac=b647e9b3b0be43d3c235a682933ad9e20d682e93ef3c7273ce647c681d4ff9e7">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z" />
-              </svg>
-            </div>
-            <div class="sm:min-w-0 sm:flex-1">
-              <p class="text-lg font-bold leading-8 text-gray-900 text-3xl">Usluge</p>
-              <p class="mt-2 text-base leading-7 text-gray-600 text-2xl">Endodoncija i restorativa <br/>Profilaksa <br/>Fiksna i mobilna protetika <br/>...</p>
-            </div>
-          </div>
-  
-          <div class="relative flex flex-col gap-6 sm:flex-row md:flex-col lg:flex-row">
-            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-500 text-white sm:shrink-0">
-              <!-- Heroicon name: outline/bolt -->
-              <img src="https://cdn-icons-png.flaticon.com/512/1254/1254238.png?w=740&t=st=1671388070~exp=1671388670~hmac=e9f3c136536428bf76030dccdb57927788fdedebb16a17907eafdc9edaccd9f2" />
-              </svg>
-            </div>
-            <div class="sm:min-w-0 sm:flex-1">
-              <p class="text-lg font-bold leading-8 text-gray-900 text-3xl">Radno vrijeme</p>
-              <p class="mt-2 text-base leading-7 text-gray-600 text-2xl">Ponedjeljak/Srijeda/Petak: 8:00 - 16:00 <br/> Utorak/Četvrtak: 14:00 - 22:00 <br/> Subota: 8:00 - 14:00</p>
-            </div>
-          </div>
-  
-          <div class="relative flex flex-col gap-6 sm:flex-row md:flex-col lg:flex-row">
-            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-500 text-white sm:shrink-0">
-              <!-- Heroicon name: outline/device-phone-mobile -->
-              <img src="https://cdn-icons-png.flaticon.com/512/1070/1070578.png?w=740&t=st=1671388149~exp=1671388749~hmac=c22d6329cced8c6421c166173dd13a9ba81fbf722b1fa5689076e661ec6bce2c" />                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
-              </svg>
-            </div>
-            <div class="sm:min-w-0 sm:flex-1">
-              <p class="text-lg font-bold leading-8 text-gray-900 text-3xl">Kontaktirajte nas</p>
-              <p class="mt-2 text-base leading-7 text-gray-600 text-2xl">tel: 021-931-333 <br/>mail: vladimir.horvat@gmail.com</p>
-            </div>
-          </div>
+        <div class="text-center">
+            <p class="font-bold mt-12 text-gray-900 lg:text-7xl text-3xl ;">Svatko zaslužuje zdrav osmijeh</p>
+            <p class="lg:mt-12 mt-8 text-base text-gray-600 lg:text-4xl text-2xl">
+                Poštovani posjetitelji, dobro došli na web stranicu ordinacije dentalne medicine Vladimir Horvat.
+            </p>
         </div>
-      </div>
+        <div style="padding-top: 40pt; padding-left: 25pt; padding-right: 2pt; ">
+            <div class="grid grid-cols-1 gap-y-16 md:grid-cols-2 md:gap-x-12 md:gap-y-16">
+                <div class="relative flex flex-col gap-6 sm:flex-row md:flex-col lg:flex-row">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-500 text-white sm:shrink-0">
+                        <!-- Heroicon name: outline/globe-alt -->
+                        <img src="https://cdn-icons-png.flaticon.com/512/1244/1244691.png?w=740&t=st=1671387991~exp=1671388591~hmac=c716a7ad5888ed8c93bba83fb70ab0c0878035bb289b282549e2306490c1a375"/>
+                    </svg>
+                </div>
+                <div class="sm:min-w-0 sm:flex-1">
+                    <p class="text-lg font-bold leading-8 text-gray-900 text-3xl">O nama</p>
+                    <p class="mt-2 text-base leading-7 text-gray-600 text-2xl">
+                        Stalnom edukacijom i nadogradnjom znanja nudimo pacijentima niz dentalnih usluga stoga nam se obratite sa povjerenjem.
+                    </p>
+                </div>
+            </div>
+            <div class="relative flex flex-col gap-6 sm:flex-row md:flex-col lg:flex-row">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-500 text-white sm:shrink-0">
+                    <!-- Heroicon name: outline/scale -->
+                    <img src="https://cdn-icons-png.flaticon.com/512/234/234751.png?w=740&t=st=1671387946~exp=1671388546~hmac=b647e9b3b0be43d3c235a682933ad9e20d682e93ef3c7273ce647c681d4ff9e7">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z" />
+                </svg>
+            </div>
+            <div class="sm:min-w-0 sm:flex-1">
+                <p class="text-lg font-bold leading-8 text-gray-900 text-3xl">Usluge</p>
+                <p class="mt-2 text-base leading-7 text-gray-600 text-2xl">
+                    Endodoncija i restorativa
+                    <br/>
+                    Profilaksa
+                    <br/>
+                    Fiksna i mobilna protetika
+                    <br/>
+                    ...
+                </p>
+            </div>
+        </div>
+        <div class="relative flex flex-col gap-6 sm:flex-row md:flex-col lg:flex-row">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-500 text-white sm:shrink-0">
+                <!-- Heroicon name: outline/bolt -->
+                <img src="https://cdn-icons-png.flaticon.com/512/1254/1254238.png?w=740&t=st=1671388070~exp=1671388670~hmac=e9f3c136536428bf76030dccdb57927788fdedebb16a17907eafdc9edaccd9f2"/>
+            </svg>
+        </div>
+        <div class="sm:min-w-0 sm:flex-1">
+            <p class="text-lg font-bold leading-8 text-gray-900 text-3xl">Radno vrijeme</p>
+            <p class="mt-2 text-base leading-7 text-gray-600 text-2xl">
+                Ponedjeljak/Srijeda/Petak: 8:00 - 16:00
+                <br/>
+                Utorak/Četvrtak: 14:00 - 22:00
+                <br/>
+                Subota: 8:00 - 14:00
+            </p>
+        </div>
     </div>
-  </div>
-
+    <div class="relative flex flex-col gap-6 sm:flex-row md:flex-col lg:flex-row">
+        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-500 text-white sm:shrink-0">
+            <!-- Heroicon name: outline/device-phone-mobile -->
+            <img src="https://cdn-icons-png.flaticon.com/512/1070/1070578.png?w=740&t=st=1671388149~exp=1671388749~hmac=c22d6329cced8c6421c166173dd13a9ba81fbf722b1fa5689076e661ec6bce2c"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+        </svg>
+    </div>
+    <div class="sm:min-w-0 sm:flex-1">
+        <p class="text-lg font-bold leading-8 text-gray-900 text-3xl">Kontaktirajte nas</p>
+        <p class="mt-2 text-base leading-7 text-gray-600 text-2xl">
+            tel: 021-931-333
+            <br/>
+            mail: vladimir.horvat@gmail.com
+        </p>
+    </div>
+</div>
+</div>
+</div>
+</div>
 {% endblock %}

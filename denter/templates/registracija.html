@@ -1,85 +1,92 @@
-{% extends "layout.html" %} 
-
-{% block header %} <h1 class="lg:pt-5 indent-6 text-6xl font-extrabold leading-none md:text-7xl lg:text-8xl text-blue-600 dark:text-blue-500">Denter</h1> {% endblock %}
-{% block title %} {{ naslov }} {% endblock %}
-
-{% block main %}
-
-<section >
-  <div class="px-6 lg:mt-12 text-gray-800">
-    <div class="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
-      <div class="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-/12 lg:w-6/12 md:w-2/12 md:mb-0">
-        <img src="https://img.freepik.com/free-vector/dental-care-concept-illustration_52683-65383.jpg?w=1800&t=st=1671383010~exp=1671383610~hmac=dcc1e1578ef315807df340cbd7bf4656e9a26692841128239c5c2d554ca42af9" class="w-full" alt="Sample image" />
-      </div>
-      <div class="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
-        <form action="" method="POST">
-          {{ obrazac.hidden_tag() }}
-          <div class="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
-            <p class="text-center font-semibold mx-4 mb-0">{{ naslov }}</p>
-          </div>
-          <!-- Input ime -->  
-          <div class="mb-6">        
-          {% if obrazac.ime.errors %}
-          {{ obrazac.ime(type="text", autocomplete="off", class="form-control block w-full px-4 py-2 text-xl font-normal text-red-700 bg-white bg-clip-padding border border-solid border-red-300 rounded transition ease-in-out m-0 focus:text-red-700 focus:bg-white focus:border-red-600 focus:outline-none", placeholder="Unesite valjano ime") }}
-          {% endif %}
-            {{ obrazac.ime(class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none", placeholder="Ime") }}
-          </div>
-        <!-- Input prezime -->  
-          <div class="mb-6">        
-          {% if obrazac.prezime.errors %}
-            {{ obrazac.prezime(type="text", autocomplete="off", class="form-control block w-full px-4 py-2 text-xl font-normal text-red-700 bg-white bg-clip-padding border border-solid border-red-300 rounded transition ease-in-out m-0 focus:text-red-700 focus:bg-white focus:border-red-600 focus:outline-none", placeholder="Unesite valjano prezime") }}
-          {% endif %}
-            {{ obrazac.prezime(class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none", placeholder="Prezime") }}
-          </div>
-          <!-- Input oib -->  
-          <div class="mb-6">        
-          {% if obrazac.oib.errors %}
-            {% if "Zauzeto" in obrazac.oib.errors %}
-                {{ obrazac.oib(type="text", autocomplete="off", class="form-control block w-full px-4 py-2 text-xl font-normal text-red-700 bg-white bg-clip-padding border border-solid border-red-300 rounded transition ease-in-out m-0 focus:text-red-700 focus:bg-white focus:border-red-600 focus:outline-none", placeholder="Račun s tim OIB-om već postoji") }}
-              {% else %}
-                {{ obrazac.oib(type="text", autocomplete="off", class="form-control block w-full px-4 py-2 text-xl font-normal text-red-700 bg-white bg-clip-padding border border-solid border-red-300 rounded transition ease-in-out m-0 focus:text-red-700 focus:bg-white focus:border-red-600 focus:outline-none", placeholder="Unesite valjani OIB") }}
-            {% endif %}
-          {% else %}
-            {{ obrazac.oib(class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none", placeholder="OIB") }}
-          {% endif %}
-          </div>
-
-          <!-- Input e-maila -->  
-          <div class="mb-6">  
-          {% if obrazac.email.errors %}
-              {% if "Zauzeto" in obrazac.email.errors %}
-                {{ obrazac.email(type="text", autocomplete="off", class="form-control block w-full px-4 py-2 text-xl font-normal text-red-700 bg-white bg-clip-padding border border-solid border-red-300 rounded transition ease-in-out m-0 focus:text-red-700 focus:bg-white focus:border-red-600 focus:outline-none", placeholder="Račun s tom adresom već postoji") }}
-              {% else %}
-                {{ obrazac.email(type="text", autocomplete="off", class="form-control block w-full px-4 py-2 text-xl font-normal text-red-700 bg-white bg-clip-padding border border-solid border-red-300 rounded transition ease-in-out m-0 focus:text-red-700 focus:bg-white focus:border-red-600 focus:outline-none", placeholder="Unesite valjanu email adresu") }}
-              {% endif %}
-          {% else %}
-            {{ obrazac.email(type="text", class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none", placeholder="Email adresa") }}
-          {% endif %}  
-            </div>
-            
-          <!-- Input lozinke  -->
-          <div class="mb-6">
-          {% if obrazac.lozinka.errors %}
-            {{ obrazac.lozinka(type="password", class="form-control block w-full px-4 py-2 text-xl font-normal text-red-700 bg-white bg-clip-padding border border-solid border-red-300 rounded transition ease-in-out m-0 focus:text-red-700 focus:bg-white focus:border-red-600 focus:outline-none", placeholder="Nevaljan format lozinke") }}
-          {% else %}
-            {{ obrazac.lozinka(type="password", class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none", placeholder="Lozinka") }}
-          {% endif %}
-          </div>
-          <!-- Input lozinke  -->
-          <div class="mb-6">
-          {% if obrazac.potvrda.errors %}
-            {{ obrazac.potvrda(type="password", class="form-control block w-full px-4 py-2 text-xl font-normal text-red-700 bg-white bg-clip-padding border border-solid border-red-300 rounded transition ease-in-out m-0 focus:text-red-700 focus:bg-white focus:border-red-600 focus:outline-none", placeholder="Nevaljana potvrda lozinke") }}
-          {% else %}
-            {{ obrazac.potvrda(type="password", class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none", placeholder="Potvrda lozinke") }}
-          {% endif %}
-          </div>
-          <div class="text-center lg:text-left">
-            {{ obrazac.submit(class="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out") }}
-            <p class="text-sm lg:text-base font-semibold mt-2 pt-1 mb-0"> Već imate račun? <a href="/prijava" class="text-pink-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out">Prijavi se</a>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</section> 
+{% extends "layout.html" %}
+{% block header %}
+    <h1 class="lg:pt-5 indent-6 text-6xl font-extrabold leading-none md:text-7xl lg:text-8xl text-blue-600 dark:text-blue-500">
+        Denter
+    </h1>
 {% endblock %}
+{% block title %}{{ naslov }}{% endblock %}
+{% block main %}
+    <script>
+    const navbar = document.querySelector("nav");
+    navbar.classList.add("hidden");
+    </script>
+    <section >
+        <div class="px-6 lg:mt-12 text-gray-800">
+            <div class="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
+                <div class="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-/12 lg:w-6/12 md:w-2/12 md:mb-0">
+                    <img src="https://img.freepik.com/free-vector/dental-care-concept-illustration_52683-65383.jpg?w=1800&t=st=1671383010~exp=1671383610~hmac=dcc1e1578ef315807df340cbd7bf4656e9a26692841128239c5c2d554ca42af9"
+                         class="w-full"
+                         alt="Sample image"/>
+                </div>
+                <div class="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
+                    <form action="" method="POST">
+                        {{ obrazac.hidden_tag() }}
+                        <div class="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
+                            <p class="text-center font-semibold mx-4 mb-0">{{ naslov }}</p>
+                        </div>
+                        <!-- Input ime -->
+                        <div class="mb-6">
+                            {% if obrazac.ime.errors %}
+                                {{ obrazac.ime(type="text", autocomplete="off", class="form-control block w-full px-4 py-2 text-xl font-normal text-red-700 bg-white bg-clip-padding border border-solid border-red-300 rounded transition ease-in-out m-0 focus:text-red-700 focus:bg-white focus:border-red-600 focus:outline-none", placeholder="Unesite valjano ime") }}
+                            {% endif %}
+                            {{ obrazac.ime(class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none", placeholder="Ime") }}
+                        </div>
+                        <!-- Input prezime -->
+                        <div class="mb-6">
+                            {% if obrazac.prezime.errors %}
+                                {{ obrazac.prezime(type="text", autocomplete="off", class="form-control block w-full px-4 py-2 text-xl font-normal text-red-700 bg-white bg-clip-padding border border-solid border-red-300 rounded transition ease-in-out m-0 focus:text-red-700 focus:bg-white focus:border-red-600 focus:outline-none", placeholder="Unesite valjano prezime") }}
+                            {% endif %}
+                            {{ obrazac.prezime(class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none", placeholder="Prezime") }}
+                        </div>
+                        <!-- Input oib -->
+                        <div class="mb-6">
+                            {% if obrazac.oib.errors %}
+                                {% if "Zauzeto" in obrazac.oib.errors %}
+                                    {{ obrazac.oib(type="text", autocomplete="off", class="form-control block w-full px-4 py-2 text-xl font-normal text-red-700 bg-white bg-clip-padding border border-solid border-red-300 rounded transition ease-in-out m-0 focus:text-red-700 focus:bg-white focus:border-red-600 focus:outline-none", placeholder="Račun s tim OIB-om već postoji") }}
+                                {% else %}
+                                    {{ obrazac.oib(type="text", autocomplete="off", class="form-control block w-full px-4 py-2 text-xl font-normal text-red-700 bg-white bg-clip-padding border border-solid border-red-300 rounded transition ease-in-out m-0 focus:text-red-700 focus:bg-white focus:border-red-600 focus:outline-none", placeholder="Unesite valjani OIB") }}
+                                {% endif %}
+                            {% else %}
+                                {{ obrazac.oib(class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none", placeholder="OIB") }}
+                            {% endif %}
+                        </div>
+                        <!-- Input e-maila -->
+                        <div class="mb-6">
+                            {% if obrazac.email.errors %}
+                                {% if "Zauzeto" in obrazac.email.errors %}
+                                    {{ obrazac.email(type="text", autocomplete="off", class="form-control block w-full px-4 py-2 text-xl font-normal text-red-700 bg-white bg-clip-padding border border-solid border-red-300 rounded transition ease-in-out m-0 focus:text-red-700 focus:bg-white focus:border-red-600 focus:outline-none", placeholder="Račun s tom adresom već postoji") }}
+                                {% else %}
+                                    {{ obrazac.email(type="text", autocomplete="off", class="form-control block w-full px-4 py-2 text-xl font-normal text-red-700 bg-white bg-clip-padding border border-solid border-red-300 rounded transition ease-in-out m-0 focus:text-red-700 focus:bg-white focus:border-red-600 focus:outline-none", placeholder="Unesite valjanu email adresu") }}
+                                {% endif %}
+                            {% else %}
+                                {{ obrazac.email(type="text", class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none", placeholder="Email adresa") }}
+                            {% endif %}
+                        </div>
+                        <!-- Input lozinke  -->
+                        <div class="mb-6">
+                            {% if obrazac.lozinka.errors %}
+                                {{ obrazac.lozinka(type="password", class="form-control block w-full px-4 py-2 text-xl font-normal text-red-700 bg-white bg-clip-padding border border-solid border-red-300 rounded transition ease-in-out m-0 focus:text-red-700 focus:bg-white focus:border-red-600 focus:outline-none", placeholder="Nevaljan format lozinke") }}
+                            {% else %}
+                                {{ obrazac.lozinka(type="password", class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none", placeholder="Lozinka") }}
+                            {% endif %}
+                        </div>
+                        <!-- Input lozinke  -->
+                        <div class="mb-6">
+                            {% if obrazac.potvrda.errors %}
+                                {{ obrazac.potvrda(type="password", class="form-control block w-full px-4 py-2 text-xl font-normal text-red-700 bg-white bg-clip-padding border border-solid border-red-300 rounded transition ease-in-out m-0 focus:text-red-700 focus:bg-white focus:border-red-600 focus:outline-none", placeholder="Nevaljana potvrda lozinke") }}
+                            {% else %}
+                                {{ obrazac.potvrda(type="password", class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none", placeholder="Potvrda lozinke") }}
+                            {% endif %}
+                        </div>
+                        <div class="text-center lg:text-left">
+                            {{ obrazac.submit(class="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out") }}
+                            <p class="text-sm lg:text-base font-semibold mt-2 pt-1 mb-0">
+                                Već imate račun? <a href="/prijava"
+    class="text-pink-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out">Prijavi se</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endblock %}

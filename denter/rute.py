@@ -37,7 +37,6 @@ def prijava():
         if korisnik and check_password_hash(korisnik.lozinka, obrazac.lozinka.data):
             #spremi Pacijentov jedinstveni id u session
             login_user(korisnik, remember=obrazac.zapamti.data)
-            flash(f'uspješan login za {obrazac.email.data}', 'dobro')
             return redirect(url_for('pocetna'))
 
         flash("Nevažeći email ili lozinka", 'lose')
@@ -107,9 +106,9 @@ def pocetna():
     #otvaranje pocetne stranice
     return render_template('pocetna.html')
 
-@app.route("/calendar")
+@app.route("/kalendar")
 def calendar():
-    return render_template('calendar.html', events=events) 
+    return render_template('kalendar.html', events=events) 
 
 
 @app.route("/addevent", methods=["GET", "POST"])
@@ -127,9 +126,7 @@ def add():
             'end': end.data
         })
         print(events)
-        return redirect(url_for('calendar'))
+        return redirect(url_for('kalendar'))
 
 
     return render_template("addevent.html", naslov='dodavnaje termina', obrazac=obrazac)
-
-

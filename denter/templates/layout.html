@@ -3,68 +3,179 @@
     <head>
         <!-- meta tagovi -->
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <!-- stil i font-->
         <script src="https://cdn.tailwindcss.com"></script>
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,800&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,800&display=swap"
+              rel="stylesheet">
         <link href="/static/styles.css" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
+              rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.0.0/index.global.min.js"></script>
-        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css"></script>-->
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script><script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script><script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css"></script>-->
         <!--ikona (favicon)-->
-        <link rel="icon" type="image/png" sizes="32x32" href="/static/slike/favicon.ico">
-
-        <title>Denter{% block title %}{% endblock %}</title>
+        <link rel="icon"
+              type="image/png"
+              sizes="32x32"
+              href="/static/slike/favicon.ico">
+        <title>Denter
+            {% block title %}{% endblock %}
+        </title>
     </head>
-
     <body>
-        <nav>
-            {% block link %}{% endblock %}
-
-            {% block botun %}{% endblock %}
+        <nav class="bg-gray-800 border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900">
+            <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+                <div class="relative flex h-16 items-center justify-between">
+                    <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                        <!-- Mobile menu button-->
+                        <button id="mobitel_otvori"
+                                type="button"
+                                class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                                aria-controls="mobile-menu"
+                                aria-expanded="false">
+                            <!--
+                      Icon when menu is closed.
+          
+                      Heroicon name: outline/bars-3
+          
+                      Menu open: "hidden", Menu closed: "block"
+                    -->
+                            <svg class="block h-6 w-6"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke-width="1.5"
+                                 stroke="currentColor"
+                                 aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                            </svg>
+                            <!--
+                      Icon when menu is open.
+          
+                      Heroicon name: outline/x-mark
+          
+                      Menu open: "block", Menu closed: "hidden"
+                    -->
+                            <svg class="hidden h-6 w-6"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke-width="1.5"
+                                 stroke="currentColor"
+                                 aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                        <div class="flex flex-shrink-0 items-center">
+                            <img class="block h-8 w-auto lg:hidden"
+                                 src="\static\slike\tooth.png"
+                                 alt="Tooth">
+                            <img class="hidden h-8 w-auto lg:block"
+                                 src="\static\slike\tooth.png"
+                                 alt="Tooth">
+                        </div>
+                        <div class="hidden sm:ml-6 sm:block">
+                            <div class="flex space-x-4">
+                                <!-- Odabrana: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                                <a href="/pocetna"
+                                   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Početna</a>
+                                <a href="/kalendar"
+                                   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Rezervacija</a>
+                                <a href="#"
+                                   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Usluge</a>
+                                {% if current_user.is_authenticated %}
+                                    <a href="/odjava"
+                                       class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Odjava</a>
+                                {% else %}
+                                    <a href="/prijava"
+                                       class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Prijava</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                        <img class="block h-8 w-auto lg:hidden"
+                             src="https://cdn-icons-png.flaticon.com/512/1031/1031101.png?w=740&t=st=1671373838~exp=1671374438~hmac=3646085f425889fae1e358aa2f0a2f835cd893ba26d28c66ccac8cf32c102df9"
+                             alt="Tooth">
+                        <img class="hidden h-8 w-auto lg:block"
+                             src="https://cdn-icons-png.flaticon.com/512/1031/1031101.png?w=740&t=st=1671373838~exp=1671374438~hmac=3646085f425889fae1e358aa2f0a2f835cd893ba26d28c66ccac8cf32c102df9"
+                             alt="Tooth">
+                        <a href="#"
+                           class=" text-white px-3 py-2 rounded-md text-sm font-medium"
+                           aria-current="page">Profil</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile menu, show/hide based on menu state. -->
+            <div class="sm:hidden" id="mobile-menu">
+                <div class="space-y-1 px-2 pt-2 pb-3">
+                    <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                    <a href="/pocetna"
+                       class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
+                       aria-current="page">Početna</a>
+                    <a href="/kalendar"
+                       class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Rezervacija</a>
+                    <a href="/usluge"
+                       class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Usluge</a>
+                       {% if current_user.is_authenticated %}
+                       <a href="/odjava" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Odjava</a>
+                       {% else %}
+                       <a href="/prijava" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Prijava</a>
+                       {% endif %}
+                    
+                </div>
+            </div>
         </nav>
-
         <header>
-        {% block header %}{% endblock %}
-
-        {% with notifikacije = get_flashed_messages(with_categories=true) %}
-        {% if notifikacije %}
-                {% for kategorija, notifikacija in notifikacije %}
+            {% block header %}{% endblock %}
+            {% with notifikacije = get_flashed_messages(with_categories=true) %}
+                {% if notifikacije %}
+                    {% for kategorija, notifikacija in notifikacije %}
                         {% if kategorija == "dobro" %}
-                        <div class=" text-center text-blue-700 py-4 lg:px-4">
-                                <div class="p-2 bg-blue-300 items-center leading-none lg:rounded-full flex lg:inline-flex" role="alert">
-                                <span class="flex rounded-full bg-blue-400 uppercase px-2 py-1 text-xs font-bold mr-3">Novo</span>
-                                <span class="font-semibold mr-2 text-left flex-auto">{{ notifikacija }}</span>
+                            <div class=" text-center text-blue-700 py-4 lg:px-4">
+                                <div class="p-2 bg-blue-300 items-center leading-none lg:rounded-full flex lg:inline-flex"
+                                     role="alert">
+                                    <span class="flex rounded-full bg-blue-400 uppercase px-2 py-1 text-xs font-bold mr-3">Novo</span>
+                                    <span class="font-semibold mr-2 text-left flex-auto">{{ notifikacija }}</span>
                                 </div>
-                        </div>
+                            </div>
                         {% endif %}
-
                         {% if kategorija == "lose" %}
-                        <div class=" text-center text-red-700 py-4 lg:px-4">
-                                <div class="p-2 bg-red-300 items-center leading-none lg:rounded-full flex lg:inline-flex" role="alert">
-                                <span class="flex rounded-full bg-red-400 uppercase px-2 py-1 text-xs font-bold mr-3">Upozorenje</span>
-                                <span class="font-semibold mr-2 text-left flex-auto">{{ notifikacija }}</span>
+                            <div class=" text-center text-red-700 py-4 lg:px-4">
+                                <div class="p-2 bg-red-300 items-center leading-none lg:rounded-full flex lg:inline-flex"
+                                     role="alert">
+                                    <span class="flex rounded-full bg-red-400 uppercase px-2 py-1 text-xs font-bold mr-3">Upozorenje</span>
+                                    <span class="font-semibold mr-2 text-left flex-auto">{{ notifikacija }}</span>
                                 </div>
-                        </div>
+                            </div>
                         {% endif %}
-                {% endfor %}
-        {% endif %}
-        {% endwith %}
-
-
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
         </header>
-
-    <main>
-    {% block main %}{% endblock %}
-    </main>
-    
+        <main>
+            {% block main %}{% endblock %}
+        </main>
     </body>
+    <footer class="mt-12 p-4 bg-white shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800">
+        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2022 Denter</span>
+        <ul class="flex flex-wrap items-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
+            <li>
+                <a href="https://github.com/MarkoKuret/denter"
+                   class="mr-4 hover:underline md:mr-6 ">GitHub</a>
+            </li>
+        </ul>
+    </footer>
+    <script>
+        const btn = document.getElementById("mobitel_otvori");
+        const menu = document.getElementById("mobile-menu");
 
-
-   
+        btn.addEventListener("click", () => {
+            menu.classList.toggle("hidden");
+        });
+    </script>
 </html>
