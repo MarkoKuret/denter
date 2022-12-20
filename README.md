@@ -66,6 +66,11 @@ folderima</p>
 <code>python3 pokreni.py</code></li>
 </ul>
 
+<ul>
+<li><strong>Instanciranje baze</strong><br>
+<code>python3 delete_create_db.py</code></li>
+</ul>
+
 </body>
 
 </html>

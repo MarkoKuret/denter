@@ -4,18 +4,24 @@
 
 {% block main %}
 
-<div id="calendar">
+<div>
+    <a href="/addevent" class="inline-block mt-10 ml-20 px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg 
+    focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" id="Add" name="Add" type="button" value="Dodaj termin"> Dodaj termin</a>
+  
 </div>
 
+
+    <div class="relative z-0 flex flex-col min-w-0 p-20 break-words bg-white border-0 shadow-xl rounded-2xl bg-clip-border">
+        <div data-toggle="calendar" id="calendar"></div>
+      </div>
 <script>
 
     document.addEventListener('DOMContentLoaded', function () {
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl,
             {
-
                 headerToolbar: { center: 'dayGridMonth,timeGridWeek,timeGridDay' }, // buttons for switching between views
-
+                
                 views:
                 {
                     dayGridMonth:
@@ -25,6 +31,16 @@
                     }
 
                 },
+
+                events: [
+                    {% for event in events %}
+            {
+                title: '{{event.title}}',
+                start: '{{event.start}}',
+                end: '{{event.end}}',
+            },
+            {% endfor %}
+     ],
     //initialView: 'dayGridMonth',
     dateClick: function() 
     {
@@ -36,7 +52,6 @@
     });
 
 </script>
-
 {% endblock %}
 <!--<!DOCTYPE html>
 <html lang="en">
