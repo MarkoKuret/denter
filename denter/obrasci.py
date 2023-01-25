@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, EmailField, PasswordField, SubmitField, BooleanField #TextAreaField
 #from wtforms.fields.html5 import EmailField
+from flask_wtf.file import FileField, FileAllowed
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from denter.modeli import Korisnik
 from flask import session
@@ -31,6 +32,7 @@ class PacijentRegistracijaObrazac(FlaskForm):
     potvrda = PasswordField('Potvrda lozinke', validators=[DataRequired(), EqualTo('lozinka')])
     submit = SubmitField('Registriraj se')
     oib = StringField('OIB', validators=[DataRequired(), Length(min =11, max=11), oib_provjera])
+    avatar = FileField('Slika profila', validators=[FileAllowed(['png', 'jpg', 'heic', 'jpeg'])])
 
 class OsobljeRegistracijaObrazac(FlaskForm):
     ime = StringField('Korisničko ime', validators=[DataRequired(), Length(min=3, max=20)])
@@ -40,6 +42,7 @@ class OsobljeRegistracijaObrazac(FlaskForm):
     potvrda = PasswordField('Potvrda lozinke', validators=[DataRequired(), EqualTo('lozinka')])
     submit = SubmitField('Registriraj se')
     oib = StringField('OIB', validators=[DataRequired(), Length(min =11, max=11), oib_provjera])
+    avatar = FileField('Slika profila', validators=[FileAllowed(['png', 'jpg', 'heic', 'jpeg'])])
 
 #obrazac sa dodavanje termina
 class TerminObrazac(FlaskForm):
