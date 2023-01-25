@@ -106,6 +106,12 @@ def pocetna():
     #otvaranje pocetne stranice
     return render_template('pocetna.html')
 
+@app.route("/profil")
+@login_required
+def profil():
+    #otvaranje stranice profila
+    return render_template('profil.html')
+
 @app.route("/kalendar", methods=["GET", "POST"])
 @login_required
 def kalendar():
