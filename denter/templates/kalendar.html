@@ -4,7 +4,7 @@
     <div id="authentication-modal"
          tabindex="-1"
          aria-hidden="true"
-         class="fixed top-0 left-0 right-0 z-50 hidden  p-4 overflow-x-hidden overflow-y-auto w-16 md:w-32 lg:w-48">
+         class="absolute z-50 flex flex-col min-w-0 px-7 py-10 fixed top-0 left-0 right-0  hidden  overflow-x-hidden overflow-y-auto ">
         <div class="relative w-full h-full max-w-md md:h-auto">
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -60,7 +60,7 @@
             data-modal-toggle="authentication-modal">
         Dodaj termin
     </button>
-    <div class="relative z-0 flex flex-col min-w-0 px-10 py-10 break-words bg-white border-0 shadow-xl rounded-2xl bg-clip-border">
+    <div class="relative z-0 flex flex-col min-w-0 px-7 py-10 break-words bg-white border-0 shadow-xl rounded-2xl bg-clip-border">
         <div data-toggle="calendar" id="calendar"></div>
     </div>
     <script>
@@ -71,10 +71,12 @@
                 headerToolbar: { start: 'dayGridMonth,timeGridWeek,prev,next',
                                 center: 'title',
                                 end: '' }, // buttons for switching between views
-                
+                              
                                 
                 
                 firstDay: 1,
+                slotMinTime: "07:00:00",
+                slotMaxTime: "21:00:00",
                 height: "auto" ,
                 views:
                 {
@@ -83,14 +85,24 @@
                         
                         titleFormat: { year: 'numeric', month: 'short' }
                         // other view-specific options here
-                    }
-                        //week view popravi
+                        
+                    },
+                    
                 },
-                eventTimeFormat: { // like '14:30:00'
+                eventTimeFormat: 
+                { // like '14:30:00'
                 hour: '2-digit',
                 minute: '2-digit',
-                meridiem: false
-            },
+                hour12: false
+                },
+
+                slotLabelFormat:
+                {
+                hour: '2-digit',
+                minute: '2-digit',
+                omitZeroMinute: false,
+                hour12: false,
+                },
 
                 events: [
             {% for termin in termini %}

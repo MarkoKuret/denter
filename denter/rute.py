@@ -165,6 +165,11 @@ def kalendar():
 
     return render_template('kalendar.html', termini=svi_termini, naslov='Kalendar', obrazac=obrazac)
 
+@app.route("/usluge", methods=["GET", "POST"])
+def usluge():
+    #otvaranje pocetne stranice
+    return render_template('usluge.html')
+
 def spremi(slika, OIB):    
     temp, tip = os.path.splitext(slika.filename)
     avatar = OIB + tip
@@ -179,3 +184,4 @@ def spremi(slika, OIB):
     slika.save(datoteka)
 
     return avatar
+

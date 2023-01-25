@@ -41,6 +41,7 @@
                         </div>
                         <!-- Input oib -->
                         <div class="mb-6">
+                            
                             {% if obrazac.oib.errors %}
                                 {% if "Zauzeto" in obrazac.oib.errors %}
                                     {{ obrazac.oib(type="text", autocomplete="off", class="form-control block w-full px-4 py-2 text-xl font-normal text-red-700 bg-white bg-clip-padding border border-solid border-red-300 rounded transition ease-in-out m-0 focus:text-red-700 focus:bg-white focus:border-red-600 focus:outline-none", placeholder="Račun s tim OIB-om već postoji") }}
@@ -82,6 +83,9 @@
                         
                         <!-- Input avatar -->
                         <div class="mb-6"></div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="avatar">
+                            Slika Profila
+                          </label>
                         {% if obrazac.avatar.errors %}
                             {{ obrazac.avatar(value="", autocomplete="off", placeholder="nevažeći format", class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none") }}
                         {% else %}
