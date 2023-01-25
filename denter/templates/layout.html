@@ -12,10 +12,13 @@
         <link href="/static/styles.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
               rel="stylesheet">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+              <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.0.0/index.global.min.js"></script>
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script><script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script><script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css"></script>-->
         <!--ikona (favicon)-->
+
+        <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+
         <link rel="icon"
               type="image/png"
               sizes="32x32"
@@ -98,14 +101,22 @@
                         </div>
                     </div>
                     <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                        <img class="block h-8 w-auto lg:hidden"
+                        {% if current_user.is_authenticated %}
+                        <img style=" border-radius: 50%" class="block h-8 w-auto lg:hidden"
+                             src="/static/avatari/{{ current_user.avatar }}"
+                             alt="Tooth">
+                        <img style=" border-radius: 50%" class="hidden h-8 w-auto lg:block"
+                             src="/static/avatari/{{ current_user.avatar }}"
+                             alt="Tooth">
+                        {% else %}
+                        <img style=" border-radius: 50%" class="block h-8 w-auto lg:hidden"
                              src="https://cdn-icons-png.flaticon.com/512/1031/1031101.png?w=740&t=st=1671373838~exp=1671374438~hmac=3646085f425889fae1e358aa2f0a2f835cd893ba26d28c66ccac8cf32c102df9"
                              alt="Tooth">
-                        <img class="hidden h-8 w-auto lg:block"
+                        <img style=" border-radius: 50%" class="hidden h-8 w-auto lg:block"
                              src="https://cdn-icons-png.flaticon.com/512/1031/1031101.png?w=740&t=st=1671373838~exp=1671374438~hmac=3646085f425889fae1e358aa2f0a2f835cd893ba26d28c66ccac8cf32c102df9"
                              alt="Tooth">
-                        <a href="#"
-                           class=" text-white px-3 py-2 rounded-md text-sm font-medium"
+                        {% endif %}
+                        <a href="/profil" class=" text-white px-3 py-2 rounded-md text-sm font-medium"
                            aria-current="page">Profil</a>
                     </div>
                 </div>
@@ -160,7 +171,9 @@
         </header>
         <main>
             {% block main %}{% endblock %}
+            {% block chat %}{% endblock %}
         </main>
+            
     </body>
     <script>
         const btn = document.getElementById("mobitel_otvori");

@@ -23,10 +23,10 @@ class Korisnik(db.Model, UserMixin):
     email =  db.Column(db.String(120), unique=True, nullable=False)
     lozinka = db.Column(db.Text, nullable=False)
     opis = db.Column(db.Text)
-    avatar = db.Column(db.String(20), nullable=False, default='avatar.svg')
+    avatar = db.Column(db.String(20), nullable=False, default='avatar.png')
     uloga = db.relationship('Uloga', secondary=uloge_korisnik,
                         backref=db.backref('korisnici', lazy='dynamic'))
-     #eobv = db.Column(db.Boolean, default=True, nullable=False)
+    #eobv = db.Column(db.Boolean, default=True, nullable=False)
 
     def ima_ulogu(self, uloga):
         moja_uloga = Uloga.query.filter_by(tipUloge=uloga).first()

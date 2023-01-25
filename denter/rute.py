@@ -1,5 +1,5 @@
 from denter import app, db
-from flask import render_template, redirect, url_for, flash, session #request, flash, jsonify
+from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_user, current_user, logout_user, login_required
 from denter.obrasci import OsobljeRegistracijaObrazac, PrijavaObrazac, PacijentRegistracijaObrazac, TerminObrazac
 from denter.modeli import Uloga, Pacijent, Osoblje, Korisnik, Termin
@@ -7,6 +7,20 @@ from denter.calendar_events import events
 from werkzeug.security import check_password_hash, generate_password_hash
 from functools import wraps
 from datetime import datetime, timedelta
+import pusher
+from PIL import Image
+import os
+
+#postavljenje pushera
+pusher_client = pusher.Pusher(
+  app_id='930370',
+  key='43251c740e8c7fdc4747',
+  secret='6cc68633eec00ebf9b9d',
+  cluster='eu',
+  ssl=True
+)
+
+#----funkcije
 
 def potrebna_uloga(uloga):
     def dekorator(func):
@@ -54,6 +68,11 @@ def registracija_klijenti():
         lozinka_hash = generate_password_hash(obrazac.lozinka.data)
         pacijent = Pacijent(ime=obrazac.ime.data, prezime=obrazac.prezime.data, OIB=obrazac.oib.data, email=obrazac.email.data, lozinka=lozinka_hash)
         uloga = Uloga.query.filter_by(tipUloge="pacijent").first()
+
+        if obrazac.avatar.data:
+            avatar = spremi(obrazac.avatar.data, obrazac.oib.data)
+            pacijent.avatar = avatar
+
         uloga.korisnici.append(pacijent)
         db.session.add(pacijent)
         db.session.commit()
@@ -77,6 +96,11 @@ def registracija_osoblje():
         lozinka_hash = generate_password_hash(obrazac.lozinka.data)
         osoblje = Osoblje(ime=obrazac.ime.data, prezime=obrazac.prezime.data, OIB=obrazac.oib.data, email=obrazac.email.data, lozinka=lozinka_hash)
         uloga = Uloga.query.filter_by(tipUloge="osoblje").first()
+
+        if obrazac.avatar.data:
+            avatar = spremi(obrazac.avatar.data, obrazac.oib.data)
+            osoblje.avatar = avatar
+
         uloga.korisnici.append(osoblje)
         db.session.add(osoblje)
         db.session.commit()
@@ -101,10 +125,25 @@ def odabir():
     #odabir vrste Pacijenta
     return render_template('odabir.html')
 
-@app.route("/pocetna")
+@app.route("/pocetna", methods=["GET", "POST"])
 def pocetna():
     #otvaranje pocetne stranice
+    try:
+        #hvatanje podataka poruke iz poslanih vrijednosti
+        ime = request.form.get('ime')
+        poruka = request.form.get('poruka')
+        #slanje poruke specificnim kanalom (tocan id bitan)
+        pusher_client.trigger('poruka-kanal', 'nova-poruka', {'poruka': poruka, 'ime': ime})
+    #ako je greska ili nema poruke
+    except:
+        pass
     return render_template('pocetna.html')
+
+@app.route("/profil")
+@login_required
+def profil():
+    #otvaranje stranice profila
+    return render_template('profil.html')
 
 @app.route("/kalendar", methods=["GET", "POST"])
 @login_required
@@ -125,3 +164,18 @@ def kalendar():
     svi_termini = Termin.query.all()
 
     return render_template('kalendar.html', termini=svi_termini, naslov='Kalendar', obrazac=obrazac)
+
+def spremi(slika, OIB):    
+    temp, tip = os.path.splitext(slika.filename)
+    avatar = OIB + tip
+    datoteka = os.path.join(app.root_path, 'static/avatari', avatar)
+
+    #rezolucija slike
+    rez = (300, 300)
+    slika = Image.open(slika)
+
+    #spremanje slike
+    slika.thumbnail(rez)
+    slika.save(datoteka)
+
+    return avatar

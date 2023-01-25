@@ -1,4 +1,7 @@
 {% extends "layout.html" %}
+
+
+
 {% block main %}
     <div class="relative">
         <img src="\static\slike\dentists-choose-equipment-table.jpg"/>
@@ -84,4 +87,120 @@
 </div>
 </div>
 </div>
+{% endblock %}
+
+{% block chat %}
+
+
+<button id="chat_btn" onclick="toggleChatPopup()">
+    <img src="static/slike/chat_icon.svg" alt="Chat icon">
+  </button>
+  <style>
+
+#chat_btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+</style>
+
+<script>
+    function toggleChatPopup() {
+      var chatPopup = document.getElementById("chat_popup");
+      if (chatPopup.classList.contains("hidden")) {
+        chatPopup.classList.add("flex");
+        chatPopup.classList.remove("hidden");
+        const height = document.body.scrollHeight;
+        window.scroll({ top: height, left: 0, behavior: 'smooth' });
+      } else {
+        chatPopup.classList.add("hidden");
+        chatPopup.classList.remove("flex");
+      }
+    }
+    </script>
+
+<div id="chat_popup" class="hidden flex flex-col items-center justify-center w-screen min-h-screen bg-gray-100 text-gray-800 p-10">
+
+	<!-- Component Start -->
+	<div class="flex flex-col flex-grow w-full max-w-xl bg-white shadow-xl rounded-lg overflow-hidden">
+		<div id="por-lista" class="flex flex-col flex-grow h-0 p-4 overflow-auto">
+
+
+
+
+			<div class="flex w-full mt-2 space-x-3 max-w-xs">
+			</div>
+
+			<div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
+				<div class="flex-shrink-0 h-10 w-10 rounded-full bg-white-300"></div>
+			</div>
+		</div>
+		
+        
+		<div class="bg-gray-300 p-4">
+			<input id="por-input" class="flex items-center h-10 w-full rounded px-3 text-sm" type="text" placeholder="Type your message…">
+            <input id="por-salji" type="submit" value="send">
+        <div>
+	</div>
+	<!-- Component End  -->
+
+</div>
+
+<script>
+
+    $(function() {
+    
+      let ime = "ime";
+      let poruka = "poruka"
+    
+      $('#por-salji').on('click', function(){
+        
+       let ime = "{{ current_user.ime }} {{ current_user.prezime }}"
+       let poruka = $('#por-input').val();
+    
+        if (poruka.length > 0) {         
+          $.post('/pocetna', {'ime' : ime, 'poruka' : poruka}, function() {
+            $('#por-input').val(null);
+          });
+        }
+      }); 
+     
+    
+      var pusher = new Pusher('43251c740e8c7fdc4747', {
+        cluster: 'eu',
+        forceTLS: true
+      });
+    
+      var kanal = pusher.subscribe('poruka-kanal');
+      kanal.bind('nova-poruka', function(data) {
+        let ime = data.ime;
+        let poruka = data.poruka;
+    
+        let poruka_oblak_desno = `<div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
+                                    <div>
+                                        <div class="bg-blue-600 text-white p-3 rounded-l-sm rounded-br-lg">
+                                            <p class="text-sm">${poruka}</p>
+                                        </div>
+                                        <span class="text-xs text-gray-500 leading-none">${ime}</span>
+                                    </div>
+                                </div>`;
+
+        let poruka_oblak_livo = `<div class="flex w-full mt-2 space-x-3 max-w-xs">
+                                <div>
+                                    <div class="bg-gray-300 p-3 rounded-r-lg rounded-bl-lg">
+                                        <p class="text-sm">${poruka}</p>
+                                    </div>
+                                    <span class="text-xs text-gray-500 leading-none">${ime}</span>
+                                </div>
+                            </div>`;
+
+        if (ime == "{{ current_user.ime }} {{ current_user.prezime }}")
+            $('#por-lista').append(poruka_oblak_desno)
+        else
+            $('#por-lista').append(poruka_oblak_livo)
+
+      });
+    });
+    </script>
+    
 {% endblock %}

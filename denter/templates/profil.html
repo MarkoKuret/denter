@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+{% block main %}
+<!-- component -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+</head>
+<body>
+    <div class="h-full bg-gray-200 p-8">
+        <div class="bg-white rounded-lg shadow-xl pb-8">
+            <div x-data="{ openSettings: false }" class="absolute right-12 mt-4 rounded">
+             
+                <div x-show="openSettings" @click.away="openSettings = false" class="bg-white absolute right-0 w-40 py-2 mt-1 border border-gray-200 shadow-2xl" style="display: none;">
+                    <div class="py-2 border-b">
+                        <p class="text-gray-400 text-xs px-6 uppercase mb-1">Settings</p>
+                       
+                    </div>
+                </div>
+            </div>
+            <div>
+                <img src="\static\slike\Dentist-background-2-3.jpg">
+            </div>
+            <div class="flex flex-col items-center -mt-20" >
+                <img style=" border-radius: 50%" src="/static/avatari/{{ current_user.avatar }}" width="220">
+                <div class="flex items-center space-x-2 mt-2">
+                    <p class="text-5xl">{{current_user.ime}} {{current_user.prezime}}</p>
+                    
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </span>
+                </div>
+              
+            </div>
+            <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8 mt-2">
+                <div class="flex items-center space-x-4 mt-2">
+                
+                </div>
+            </div>
+        </div>
+
+        <div class="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
+            <div class="w-full flex flex-col 2xl:w-1/3">
+                <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
+                    <h4 class="text-xl text-gray-900 font-bold">Osobni podaci</h4>
+                    <ul class="mt-2 text-gray-700">
+                        <li class="flex border-y py-2">
+                            <span class="font-bold w-24">Ime:</span>
+                            <span class="text-gray-700">{{current_user.ime}}</span>
+                        </li>
+                        <li class="flex border-b py-2">
+                            <span class="font-bold w-24">Prezime:</span>
+                            <span class="text-gray-700">{{current_user.prezime}}</span>
+                        </li>
+                        <li class="flex border-b py-2">
+                            <span class="font-bold w-24">Email:</span>
+                            <span class="text-gray-700">{{current_user.email}}</span>
+                        </li>
+                     
+                       
+                    </ul>
+                
+            
+</body>
+</html>
+{% endblock %}
